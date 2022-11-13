@@ -1,3 +1,8 @@
+/*
+ * Rustam Karimov
+ * 17915
+ */
+
 package blackjack.player;
 
 import blackjack.deck.Card;
