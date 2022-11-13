@@ -81,7 +81,7 @@ public class Driver {
 
                     case 3:
                         System.out
-                                .println(OutputColors.YELLOW + "\n>>> Your balance: PLN" + player.getMoney() + " <<<"
+                                .println(OutputColors.YELLOW + "\n>>> Your balance: PLN " + player.getMoney() + " <<<"
                                         + OutputColors.RESET);
                         break;
                     case 4:
