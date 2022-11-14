@@ -6,7 +6,7 @@
 package blackjack.player;
 
 import blackjack.deck.Card;
-import blackjack.gameProcess.BlackJack;
+import blackjack.gameProcess.Game;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -111,7 +111,7 @@ public class Player {
                 else
                     v += c.getValue() + 1;
             } else {
-                if (v + 11 > BlackJack.MAX_CARDS_VALUE)
+                if (v + 11 > Game.MAX_CARDS_VALUE)
                     v += 1;
                 else
                     v += 11;

@@ -7,7 +7,7 @@ package blackjack;
 
 import java.io.*;
 
-import blackjack.gameProcess.BlackJack;
+import blackjack.gameProcess.Game;
 import blackjack.player.Player;
 import utils.OutputColors;
 import java.util.InputMismatchException;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Driver {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
-        BlackJack bjack;
+        Game bjack;
         Player player = new Player();
         int cond, bet = 0;
         boolean name_entered = false;
@@ -39,18 +39,18 @@ public class Driver {
                             player.setName(sc.next());
                             name_entered = true;
                         }
-                        if (player.getMoney() >= BlackJack.MIN_BET) {
+                        if (player.getMoney() >= Game.MIN_BET) {
                             System.out
                                     .println(OutputColors.YELLOW + "\n>>> Balance: PLN " + player.getMoney() + " <<<"
                                             + OutputColors.RESET);
 
                             System.out
-                                    .println("\n(min: " + BlackJack.MIN_BET + " | all-in: " + player.getMoney() + ")");
+                                    .println("\n(min: " + Game.MIN_BET + " | all-in: " + player.getMoney() + ")");
                             System.out.print("Your bet: ");
                             bet = sc.nextInt();
-                            while (bet > player.getMoney() || bet < BlackJack.MIN_BET) {
+                            while (bet > player.getMoney() || bet < Game.MIN_BET) {
                                 System.out.print(OutputColors.RED + "Attention!! You can bet only between "
-                                        + BlackJack.MIN_BET + " and "
+                                        + Game.MIN_BET + " and "
                                         + player.getMoney() + ": "
                                         + OutputColors.RESET);
                                 bet = sc.nextInt();
@@ -58,7 +58,7 @@ public class Driver {
 
                             player.setBet(bet);
 
-                            bjack = new BlackJack(player);
+                            bjack = new Game(player);
                             bjack.run();
                         } else
                             System.out.println(OutputColors.RED
@@ -67,7 +67,7 @@ public class Driver {
                         break;
 
                     case 2:
-                        if (player.getMoney() < BlackJack.MIN_BET) {
+                        if (player.getMoney() < Game.MIN_BET) {
                             player.resetMoney();
                             System.out.println(OutputColors.BLUE
                                     + "\nYour balance successfully renewed and now you have PLN "

@@ -11,7 +11,7 @@ import utils.OutputColors;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class BlackJack {
+public class Game {
     private final CardBox Deck;
     private Player player;
     private final Player dealer;
@@ -22,7 +22,7 @@ public class BlackJack {
     private boolean active;
     private boolean isTurnPlayer;
 
-    public BlackJack() {
+    public Game() {
         Deck = new CardBox(MIN_DEFAULT_CARDS);
         Deck.shuffle();
         dealer = new Player(); // dealer.name = "Dealer"
@@ -30,7 +30,7 @@ public class BlackJack {
         isTurnPlayer = true;
     }
 
-    public BlackJack(Player player) {
+    public Game(Player player) {
         Deck = new CardBox(MIN_DEFAULT_CARDS);
         Deck.shuffle();
         dealer = new Player(); // dealer.name = "Dealer", dealer.bet = 0, dealer.money = 1000;
