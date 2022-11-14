@@ -2,7 +2,7 @@ package blackjack.gameProcess;
 
 import blackjack.deck.*;
 import blackjack.player.*;
-import utils.OutputColors;
+import utils.Design;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -49,7 +49,7 @@ public class Game {
                 if (player.cardValue() != 21) {
                     try {
                         System.out.print(
-                                OutputColors.YELLOW + "\n Hit (+) or Stand (-)? " + OutputColors.RESET);
+                                Design.YELLOW + "\n Hit (+) or Stand (-)? " + Design.RESET);
                         risp = sc.next();
                         if (risp.equals("+"))
                             player.addCard(Deck.pop());
@@ -122,19 +122,19 @@ public class Game {
     private void printResult(int esito) {
         if (esito > 0) {
             System.out.println(
-                    OutputColors.RED + "\n\nUnfortunately, you (" + player.getName() + ") lost PLN " + player.getBet()
+                    Design.RED + "\n\nUnfortunately, you (" + player.getName() + ") lost PLN " + player.getBet()
                             + "\nYour current balance is: PLN " + (player.getMoney() - player.getBet())
-                            + OutputColors.RESET);
+                            + Design.RESET);
             player.updateMoney(-player.getBet());
         } else if (esito < 0) {
-            System.out.println(OutputColors.BLUE + "\n\nCongratulations! You (" + player.getName() + ") won PLN "
+            System.out.println(Design.BLUE + "\n\nCongratulations! You (" + player.getName() + ") won PLN "
                     + player.getBet() * 2 + "\nYour current balance is: PLN " + (player.getMoney() + player.getBet())
-                    + OutputColors.RESET);
+                    + Design.RESET);
             player.updateMoney(player.getBet());
         } else
-            System.out.println(OutputColors.YELLOW + "\n\n Draw, money have been refunded to your account!"
+            System.out.println(Design.YELLOW + "\n\n Draw, money have been refunded to your account!"
                     + "\nYour current balance is: PLN " + player.getMoney()
-                    + OutputColors.RESET);
+                    + Design.RESET);
 
         try {
             Thread.sleep(MILLISECONDS_SLEEP);

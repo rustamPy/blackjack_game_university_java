@@ -9,7 +9,7 @@ import java.io.*;
 
 import blackjack.gameProcess.Game;
 import blackjack.player.Player;
-import utils.OutputColors;
+import utils.Design;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,9 +23,9 @@ public class Driver {
         try {
             do {
                 System.out.println(
-                        OutputColors.RED
+                        Design.RED
                                 + "\n-------------------\n🃏🃏🎰 Black Jack 🎰🃏🃏\n-------------------\n");
-                System.out.println(OutputColors.RESET + "(1) - Play");
+                System.out.println(Design.RESET + "(1) - Play");
                 System.out.println("(2) - Top-up Balance");
                 System.out.println("(3) - View Balance");
                 System.out.println("(4) - Help (Tutorial)");
@@ -41,18 +41,18 @@ public class Driver {
                         }
                         if (player.getMoney() >= Game.MIN_BET) {
                             System.out
-                                    .println(OutputColors.YELLOW + "\n>>> Balance: PLN " + player.getMoney() + " <<<"
-                                            + OutputColors.RESET);
+                                    .println(Design.YELLOW + "\n>>> Balance: PLN " + player.getMoney() + " <<<"
+                                            + Design.RESET);
 
                             System.out
                                     .println("\n(min: " + Game.MIN_BET + " | all-in: " + player.getMoney() + ")");
                             System.out.print("Your bet: ");
                             bet = sc.nextInt();
                             while (bet > player.getMoney() || bet < Game.MIN_BET) {
-                                System.out.print(OutputColors.RED + "Attention!! You can bet only between "
+                                System.out.print(Design.RED + "Attention!! You can bet only between "
                                         + Game.MIN_BET + " and "
                                         + player.getMoney() + ": "
-                                        + OutputColors.RESET);
+                                        + Design.RESET);
                                 bet = sc.nextInt();
                             }
 
@@ -61,28 +61,28 @@ public class Driver {
                             bjack = new Game(player);
                             bjack.run();
                         } else
-                            System.out.println(OutputColors.RED
+                            System.out.println(Design.RED
                                     + "\n You don't have enough money to play. Top-up your account! (option 2)"
-                                    + OutputColors.RESET);
+                                    + Design.RESET);
                         break;
 
                     case 2:
                         if (player.getMoney() < Game.MIN_BET) {
                             player.resetMoney();
-                            System.out.println(OutputColors.BLUE
+                            System.out.println(Design.BLUE
                                     + "\nYour balance successfully renewed and now you have PLN "
                                     + player.getDefaultMoney() + "."
-                                    + OutputColors.RESET);
+                                    + Design.RESET);
                         } else
-                            System.out.println(OutputColors.RED
+                            System.out.println(Design.RED
                                     + "\nAttention!! You have enough money to continue playing"
-                                    + OutputColors.RESET);
+                                    + Design.RESET);
                         break;
 
                     case 3:
                         System.out
-                                .println(OutputColors.YELLOW + "\n>>> Your balance: PLN " + player.getMoney() + " <<<"
-                                        + OutputColors.RESET);
+                                .println(Design.YELLOW + "\n>>> Your balance: PLN " + player.getMoney() + " <<<"
+                                        + Design.RESET);
                         break;
                     case 4:
                         File file = new File(
@@ -96,8 +96,8 @@ public class Driver {
                         break;
                     default:
                         System.out.println(
-                                OutputColors.RED_BACKGROUND + "\nWrong option: " + cond
-                                        + OutputColors.RESET);
+                                Design.RED_BACKGROUND + "\nWrong option: " + cond
+                                        + Design.RESET);
                         break;
 
                 }
