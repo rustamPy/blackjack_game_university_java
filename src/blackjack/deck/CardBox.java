@@ -1,8 +1,3 @@
-/*
- * Rustam Karimov
- * 17915
- */
-
 package blackjack.deck;
 
 import java.util.ArrayList;
