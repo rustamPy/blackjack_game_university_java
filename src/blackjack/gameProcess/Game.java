@@ -2,13 +2,13 @@ package blackjack.gameProcess;
 
 import blackjack.deck.*;
 import blackjack.player.*;
-import utils.Design;
+import utils.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
     private final CardBox Deck;
-    private Player player;
+    private final Player player;
     private final Player dealer;
     public static final int MAX_CARDS_VALUE = 21;
     public static final int MIN_BET = 2;
@@ -17,13 +17,6 @@ public class Game {
     private boolean active;
     private boolean isTurnPlayer;
 
-    public Game() {
-        Deck = new CardBox(MIN_DEFAULT_CARDS);
-        Deck.shuffle();
-        dealer = new Player(); // dealer.name = "Dealer"
-        active = true;
-        isTurnPlayer = true;
-    }
 
     public Game(Player player) {
         Deck = new CardBox(MIN_DEFAULT_CARDS);
@@ -32,10 +25,6 @@ public class Game {
         this.player = player; // player.name = "Mark", player.bet = 5, player.money = 1000;
         active = true;
         isTurnPlayer = true;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public void turnPlayer() {

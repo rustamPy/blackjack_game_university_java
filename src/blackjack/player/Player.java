@@ -1,7 +1,7 @@
 package blackjack.player;
 
-import blackjack.deck.Card;
-import blackjack.gameProcess.Game;
+import blackjack.deck.*;
+import blackjack.gameProcess.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +9,7 @@ import java.util.Random;
 public class Player {
 
     private String name;
-    private ArrayList<Card> cards;
+    public ArrayList<Card> cards;
     private int money;
     private int bet;
     private static final int DEFAULT_MONEY = 1000;
@@ -19,26 +19,6 @@ public class Player {
         cards = new ArrayList<>();
         money = DEFAULT_MONEY;
         bet = 0;
-    }
-
-    public Player(String name) {
-        if (name.length() == 0)
-            this.name = randName();
-        else
-            this.name = name;
-        cards = new ArrayList<>();
-        money = DEFAULT_MONEY;
-        bet = 0;
-    }
-
-    public Player(String name, int bet) {
-        if (name.length() == 0)
-            this.name = randName();
-        else
-            this.name = name;
-        cards = new ArrayList<>();
-        money = DEFAULT_MONEY;
-        this.bet = bet;
     }
 
     public String getName() {
@@ -89,10 +69,6 @@ public class Player {
     }
 
     public void addCard(Card c) {
-        cards.add(c);
-    }
-
-    public void add(Card c) {
         cards.add(c);
     }
 
