@@ -4,7 +4,6 @@ import blackjack.deck.*;
 import blackjack.gameProcess.*;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Player {
 
@@ -27,7 +26,7 @@ public class Player {
 
     public void setName(String name) {
         if (name.length() == 0)
-            this.name = randName();
+            this.name = "Unknown player";
         else
             this.name = name;
     }
@@ -48,18 +47,6 @@ public class Player {
         this.bet = bet;
     }
 
-    private String randName() {
-        Random rand = new Random();
-        String letters = "abcdefghiljkmnopqrstuvwxyz";
-        String name = "";
-        int maxLung = 10, minLung = 3;
-        int l = rand.nextInt(maxLung - minLung) + minLung;
-        for (int i = 0; i < l; i++) {
-            name += letters.charAt(rand.nextInt(letters.length()));
-        }
-        return name;
-    }
-
     public void resetMoney() {
         this.money = DEFAULT_MONEY;
     }
@@ -73,14 +60,14 @@ public class Player {
     }
 
     public int cardValue() {
-        ArrayList<Card> lista = ord(cards);
+        ArrayList<Card> card_list = ord(cards);
         int v = 0;
-        for (Card c : lista) {
+        for (Card c : card_list) {
             if (!c.isAce()) {
                 if (c.isFigure())
                     v += 10;
                 else
-                    v += c.getValue() + 1;
+                    v += c.getValue() + 2;
             } else {
                 if (v + 11 > Game.MAX_CARDS_VALUE)
                     v += 1;
@@ -91,10 +78,10 @@ public class Player {
         return v;
     }
 
-    private ArrayList<Card> ord(ArrayList<Card> mano) {
-        ArrayList<Card> lista = new ArrayList<>(mano);
-        lista.sort(Comparable::compareTo);
-        return lista;
+    private ArrayList<Card> ord(ArrayList<Card> hand) {
+        ArrayList<Card> card_list = new ArrayList<>(hand);
+        card_list.sort(Comparable::compareTo);
+        return card_list;
     }
 
     public int countCards() {
