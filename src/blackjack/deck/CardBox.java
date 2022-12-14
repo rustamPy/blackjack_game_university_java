@@ -5,21 +5,21 @@ import java.util.Random;
 
 public class CardBox {
     private final ArrayList<Card> deck;
-    public static final int DEFAULT_CARDS = 52;
-    public static final int DEFAULT_NUM_SHUFFLE = 7;
+    public static final int DEFAULT_SHUFFLE_NUM = 5;
+    private static final int NUMBER_OF_CARDS = 312;
+    //The standard 52-card pack is used, but in most casinos several decks of cards are shuffled together.
+    // The six-deck game (312 cards) is the most popular.
+    //https://bicyclecards.com/how-to-play/blackjack/
 
-    CardBox() {
-        deck = initDeck(DEFAULT_CARDS);
+
+    public CardBox() {
+        deck = initDeck();
     }
 
-    public CardBox(int numCards) {
-        deck = initDeck(numCards);
-    }
-
-    private ArrayList<Card> initDeck(int numCards) {
-        ArrayList<Card> vet = new ArrayList<>(numCards);
+    private ArrayList<Card> initDeck() {
+        ArrayList<Card> vet = new ArrayList<>(NUMBER_OF_CARDS);
         int k = 0;
-        while (k < numCards) { // 0<52
+        while (k < NUMBER_OF_CARDS) { // 0<52
             for (int i = 0; i < Card.S.length(); i++) {
                 for (int j = 0; j < Card.V.length(); j++) {
                     vet.add(new Card(j, i));
@@ -30,12 +30,9 @@ public class CardBox {
         return vet;
     }
 
-    public int size() {
-        return deck.size();
-    }
-
     public void shuffle() {
-        shuffle(DEFAULT_NUM_SHUFFLE);
+
+        shuffle(DEFAULT_SHUFFLE_NUM);
     }
 
     public void shuffle(int times) {
@@ -59,18 +56,6 @@ public class CardBox {
         return c;
     }
 
-    public Card pull() {
-        return get(0);
-    }
-
-    public Card get(int index) {
-        return deck.get(index);
-    }
-
-    public Card pick() {
-        Random rand = new Random();
-        return deck.get(rand.nextInt(deck.size()));
-    }
 
     public String toString() {
         String s = "\n";
