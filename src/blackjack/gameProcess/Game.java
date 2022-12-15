@@ -38,13 +38,13 @@ public class Game {
             else {
                 if (player.cardValue() != 21) {
                     try {
-                        System.out.print(Design.YELLOW + "\n Hit (+) or Stand (-)? " + Design.RESET);
-                        sign = sc.next();
-                        if (sign.equals("+"))
-                            player.addCard(Deck.pop());
-                        else
-                            isTurnPlayer = false;
-
+                        while (true) {
+                            System.out.print(Design.YELLOW + "\n Hit (+) or Stand (-)? " + Design.RESET);
+                            sign = sc.next();
+                            if (sign.equals("+")) {player.addCard(Deck.pop()); break;}
+                            else if (sign.equals("-")) {isTurnPlayer = false; break;}
+                            else {System.out.println("Do you mean Stand or Hit?");}
+                        }
                         if (player.cardValue() == MAX_CARDS_VALUE) {
                             isTurnPlayer = false;
                             active = false;
