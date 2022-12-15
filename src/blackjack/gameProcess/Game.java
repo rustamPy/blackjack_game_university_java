@@ -2,8 +2,10 @@ package blackjack.gameProcess;
 
 import blackjack.deck.CardBox;
 import blackjack.player.Player;
+import blackjack.player.Statistics;
 import utils.Design;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,6 +13,7 @@ public class Game {
     private final CardBox Deck;
     private final Player player;
     private final Player dealer;
+    private final Statistics stats;
     public static final int MAX_CARDS_VALUE = 21;
     public static final int MIN_BET = 2;
     private static final int MILLISECONDS_SLEEP = 1200;
@@ -18,11 +21,12 @@ public class Game {
     private boolean isTurnPlayer;
 
 
-    public Game(Player player) {
+    public Game(Player player, Statistics stats) {
         Deck = new CardBox();
         Deck.shuffle();
         dealer = new Player(); // dealer.name = "Dealer", dealer.bet = 0, dealer.money = 1000;
         this.player = player; // player.name = "Mark", player.bet = 5, player.money = 1000;
+        this.stats = stats;
         active = true;
         isTurnPlayer = true;
     }
@@ -41,9 +45,19 @@ public class Game {
                         while (true) {
                             System.out.print(Design.YELLOW + "\n Hit (+) or Stand (-)? " + Design.RESET);
                             sign = sc.next();
-                            if (sign.equals("+")) {player.addCard(Deck.pop()); break;}
-                            else if (sign.equals("-")) {isTurnPlayer = false; break;}
-                            else {System.out.println("Do you mean Stand or Hit?");}
+                            if (Arrays.asList("+", "1", "yes", "y", "go", "hit").contains(sign.toLowerCase())) {
+                                player.addCard(Deck.pop());
+                                break;
+                            } else if (Arrays.asList("-", "0", "no", "n", "stop", "stand").contains(sign.toLowerCase())) {
+                                isTurnPlayer = false;
+                                break;
+                            } else {
+                                System.out.println("The option " +
+                                        "\"" + sign + "\" " +
+                                        "is not clear, " +
+                                        player.getName() +
+                                        "\nDo you mean Stand or Hit?");
+                            }
                         }
                         if (player.cardValue() == MAX_CARDS_VALUE) {
                             isTurnPlayer = false;
@@ -111,19 +125,24 @@ public class Game {
     private void printResult(int opt) {
         if (opt == -1) {
             System.out.println(
-                    Design.RED + "\n\nUnfortunately, you (" + player.getName() + ") lost PLN " + player.getBet()
+                    Design.RED + "\n\nUnfortunately \uD83D\uDE2D, you (" + player.getName() + ") lost PLN " + player.getBet()
                             + "\nYour current balance is: PLN " + (player.getMoney() - player.getBet())
                             + Design.RESET);
             player.updateMoney(-player.getBet());
+            stats.plusLoss();
+
         } else if (opt == 1) {
-            System.out.println(Design.BLUE + "\n\nCongratulations! You (" + player.getName() + ") won PLN "
-                    + player.getBet() * 2 + "\nYour current balance is: PLN " + (player.getMoney() + player.getBet())
+            System.out.println(Design.BLUE + "\n\nCongratulations!\uD83E\uDD73\uD83C\uDF89\uD83D\uDC4F You (" + player.getName() + ") won PLN "
+                    + player.getBet() * 2 + "\nYour current balance is: PLN " + (player.getMoney() + player.getBet() * 2)
                     + Design.RESET);
-            player.updateMoney(player.getBet());
-        } else
-            System.out.println(Design.YELLOW + "\n\n Draw, money have been refunded to your account!"
+            player.updateMoney(player.getBet() * 2);
+            stats.plusWin();
+        } else {
+            System.out.println(Design.YELLOW + "\n\nDraw \uD83D\uDE15, money have been refunded to your account!"
                     + "\nYour current balance is: PLN " + player.getMoney()
                     + Design.RESET);
+            stats.plusDraw();
+        }
 
         try {
             Thread.sleep(MILLISECONDS_SLEEP);

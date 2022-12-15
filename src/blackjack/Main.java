@@ -2,6 +2,7 @@ package blackjack;
 
 import blackjack.gameProcess.Game;
 import blackjack.player.Player;
+import blackjack.player.Statistics;
 import utils.Design;
 
 import java.io.File;
@@ -15,6 +16,7 @@ public class Main {
         Scanner name_sc = new Scanner(System.in);
         Game bjack;
         Player player = new Player();
+        Statistics stats = new Statistics(player);
         int option, bet;
         boolean name_entered = false;
         try {
@@ -28,6 +30,7 @@ public class Main {
                 System.out.println("(2) - Top-up Balance");
                 System.out.println("(3) - View Balance");
                 System.out.println("(4) - Help (Tutorial)");
+                System.out.println("(5) - Statistics");
                 System.out.println("(0) - Exit");
                 System.out.print("\nOption: ");
                 option = sc.nextInt();
@@ -55,7 +58,7 @@ public class Main {
 
                             player.setBet(bet);
 
-                            bjack = new Game(player);
+                            bjack = new Game(player, stats);
                             bjack.run();
                         } else
                             System.out.println(Design.RED
@@ -91,6 +94,18 @@ public class Main {
 
                         }
                         break;
+
+                    case 5:
+                        if (!name_entered) {
+                            System.out.print("\nEnter your name (Default: 'Unknown player'): ");
+                            player.setName(name_sc.nextLine());
+                            name_entered = true;
+                        }
+                        Scanner stat_sc = new Scanner(stats.toString());
+                        while (stat_sc.hasNextLine()) {
+                            System.out.println(stat_sc.nextLine());
+                            Thread.sleep(100);
+                        }
                     case 0:
                         break;
                     default:
