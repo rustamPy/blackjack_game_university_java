@@ -28,7 +28,7 @@ public class Game {
     }
 
 
-    public void turnPlayer() {
+    private void turnPlayer() {
         if (active) {
             Scanner sc = new Scanner(System.in);
             String sign;
@@ -62,7 +62,7 @@ public class Game {
         }
     }
 
-    public void turnDealer() {
+    private void turnDealer() {
         if (dealer.countCards() < 2) {
             dealer.addCard(Deck.pop());
         } else {
@@ -86,7 +86,7 @@ public class Game {
      * 0 = tie
      **/
 
-    public int resultGame() {
+    private int assessHand() {
         if (dealer.cardValue() > MAX_CARDS_VALUE)
             return 1;
         else if (player.cardValue() > MAX_CARDS_VALUE)
@@ -99,9 +99,9 @@ public class Game {
             return 0;
     }
 
-    public void printStatus() {
-        System.out.println("\n " + dealer.getName() + "\t\t" + dealer.getCards() + " = " + dealer.cardValue());
-        System.out.println(" " + player.getName() + "\t\t" + player.getCards() + " = " + player.cardValue());
+    private void printHand() {
+        System.out.println("\n -> " + dealer.getName() + "\t\t" + dealer.getCards() + " = " + dealer.cardValue());
+        System.out.println(" -> " + player.getName() + "\t\t" + player.getCards() + " = " + player.cardValue());
         try {
             Thread.sleep(MILLISECONDS_SLEEP);
         } catch (InterruptedException ignored) {
@@ -137,14 +137,14 @@ public class Game {
             while (isTurnPlayer) {
                 //System.out.println(Deck.toString());
                 turnPlayer();
-                printStatus();
+                printHand();
             }
             if (active) {
                 turnDealer();
-                printStatus();
+                printHand();
             }
         }
-        printResult(resultGame());
+        printResult(assessHand());
 
         player.clearTable();
         dealer.clearTable();
