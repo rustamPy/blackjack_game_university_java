@@ -1,4 +1,4 @@
-# blackjack_game_university_java
+# BlackJack (21) Game (OOP Project)
 This is the blackjack game
 1. Double Down on 10 or 11, Unless the Dealer Has a 10 or Ace
 To make more profit, you must get more money onto the table when you think you have the upper hand. The best way to do this is to double down when you have 10 or 11, given that it’s likely your next card will be valued at 10. However, you should NOT double down if the dealer’s upcard is a 10 or ace because you risk missing out, and HE gets the 10-card.
