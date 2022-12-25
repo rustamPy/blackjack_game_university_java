@@ -45,17 +45,17 @@ public class Statistics {
     public String toString() {
 
         return  "\n ---------------------------\n" +
-                "|\tPlayer name: " + player.getName() + "\t\t|" +
+                "|\tPlayer name: " + player.getName() +
                 "\n ---------------------------" +
-                "\n|\tTotal games: " + (getTotal()) + "\t\t\t|" +
+                "\n|\tTotal games: " + (getTotal()) +
                 "\n ---------------------------" +
-                "\n|\tSuccessful games: " + getWin() + "\t\t|" +
+                "\n|\tWins: " + getWin() +
                 "\n ---------------------------" +
-                "\n|\tLost games: " + getLoss() + "\t\t\t|" +
+                "\n|\tDefeats: " + getLoss() +
                 "\n ---------------------------" +
-                "\n|\tTied games: " + getDraw() + "\t\t\t|" +
+                "\n|\tTies: " + getDraw() +
                 "\n ---------------------------" +
-                "\n|\tW/L: " + getWin() + "/" + getLoss() + "\t\t\t\t|" +
+                "\n|\tW/D: " + getWin() + "/" + getLoss() +
                 "\n ---------------------------";
     }
 
