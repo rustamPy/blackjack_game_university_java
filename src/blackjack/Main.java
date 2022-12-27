@@ -32,8 +32,19 @@ public class Main {
                 System.out.println("(4) - Help (Tutorial)");
                 System.out.println("(5) - Statistics");
                 System.out.println("(0) - Exit");
-                System.out.print("\nOption: ");
-                option = sc.nextInt();
+                while (true) {
+                    Scanner scan = new Scanner(System.in);
+                    System.out.print("Option: ");
+                    if (scan.hasNextInt()) {
+                        option = scan.nextInt();
+                        scan.nextLine();
+                        break;
+                    } else if (scan.hasNext()) {
+                        System.out.println("Error: Option is String not Integer.");
+                    } else {
+                        System.out.println("Error: Option is not Integer.");
+                    }
+                }
                 switch (option) {
                     case 1:
                         if (!name_entered) {
@@ -44,8 +55,19 @@ public class Main {
                         if (player.getMoney() >= Game.MIN_BET) {
                             System.out.println(Design.YELLOW + "\n>>> Balance: PLN " + player.getMoney() + " <<<" + Design.RESET);
                             System.out.println("\n(min: " + Game.MIN_BET + " | all-in: " + player.getMoney() + ")");
-                            System.out.print("Your bet: ");
-                            bet = sc.nextInt();
+                            while (true) {
+                                Scanner scan = new Scanner(System.in);
+                                System.out.print("Bet: ");
+                                if (scan.hasNextInt()) {
+                                    bet = scan.nextInt();
+                                    scan.nextLine();
+                                    break;
+                                } else if (scan.hasNext()) {
+                                    System.out.println("Error: Bet is String not Integer.");
+                                } else {
+                                    System.out.println("Error: Bet is not Integer.");
+                                }
+                            }
                             //Check if bet is set properly (withing the proper range)
                             while (bet > player.getMoney() || bet < Game.MIN_BET) {
                                 System.out.print(Design.RED + "Attention!! You can bet only between " + Game.MIN_BET +

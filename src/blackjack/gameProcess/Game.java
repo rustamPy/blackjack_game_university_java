@@ -126,15 +126,15 @@ public class Game {
         if (opt == -1) {
             System.out.println(
                     Design.RED + "\n\nUnfortunately \uD83D\uDE2D, you (" + player.getName() + ") lost PLN " + player.getBet()
-                            + "\nYour current balance is: PLN " + (player.getMoney() - player.getBet())
-                            + Design.RESET);
+                            + "\nYour current balance is: PLN " + player.getMoney() + " - " + player.getBet() + " = " +
+                            (player.getMoney() - player.getBet()) + Design.RESET);
             player.updateMoney(-player.getBet());
             stats.plusLoss();
 
         } else if (opt == 1) {
             System.out.println(Design.BLUE + "\n\nCongratulations!\uD83E\uDD73\uD83C\uDF89\uD83D\uDC4F You (" + player.getName() + ") won PLN "
                     + player.getBet() * 2 + "\nYour current balance is: PLN " +
-                    (player.getMoney()-player.getBet()) + " + " + player.getBet() + " x 2 " + " = "  +
+                    (player.getMoney() - player.getBet()) + " + " + player.getBet() + " x 2 " + " = " +
                     (player.getMoney() + player.getBet())
                     + Design.RESET);
             player.updateMoney(player.getBet());
